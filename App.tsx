@@ -1,26 +1,59 @@
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import AgendaTelefonica from './components/AgendaTelefonica';
-import DetalleContacto from './components/DetalleContacto';
+import AgregarRecetaScreen from './components/AgregarRecetaScreen';
 import Inicio from './components/Inicio';
+import ListaRecetaScreen from './components/ListaRecetaScreen';
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="Inicio"
-                    component={Inicio}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen name="AgendaTelefonica" component={AgendaTelefonica} />
-                <Stack.Screen name="DetalleContacto" component={DetalleContacto} />
-            </Stack.Navigator>
+
+<Tab.Navigator
+      initialRouteName="Recetas APP"
+    >
+      <Tab.Screen
+        name="Recetas APP"
+        component={Inicio}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="agregar receta"
+        component={AgregarRecetaScreen}
+        options={{
+          tabBarLabel: 'Agregar Receta',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="book-plus" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="lista receta"
+        component={ListaRecetaScreen}
+        options={{
+          tabBarLabel: 'Lista Receta',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="list-status" color={color} size={26} />
+          ),
+        }}
+      />
+    </Tab.Navigator>    
+
+
+
+
+          
         </NavigationContainer>
     );
 };
 
 export default App;
+
